@@ -27,7 +27,7 @@ function App() {
       ...tasks,
       {
         id: Date.now(),
-        title: title,
+        title,
         completed: false
       }
     ])

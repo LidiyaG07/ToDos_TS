@@ -9,7 +9,7 @@ const TaskForm = ({ onAdd }: TaskFormProps) => {
 
     const handleSubmit = (inputValue: string) => {
         if (inputValue.trim()) {
-            onAdd(inputValue);
+            onAdd(inputValue.trim());
         }
 
         setInputValue("");
