@@ -4,7 +4,7 @@ export interface Task {
     completed: boolean;
 }
 
-const tasks: Task[] = [
+export const tasks: Task[] = [
     {
         id: 1,
         title: "Купить молоко",
