@@ -8,13 +8,14 @@ const TaskForm = ({ onAdd }: TaskFormProps) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleSubmit = (inputValue: string) => {
-        if (!inputValue.trim()) return;
+        if (inputValue.trim()) {
+            onAdd(inputValue);
+        }
 
-        onAdd(inputValue);
         setInputValue("");
     }
 
-    const keyDown = (e) => {
+    const keyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             handleSubmit(inputValue)
         }

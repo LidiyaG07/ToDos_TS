@@ -5,11 +5,11 @@ import TaskItem from './components/taskItem/TaskItem';
 import TaskForm from './components/taskForm/TaskForm';
 
 function App() {
-  const [listTasks, setlistTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   const toggleTask = (id: number): void => {
-    setlistTasks(
-      listTasks.map((task) => {
+    setTasks(
+      tasks.map((task) => {
         if (task.id === id) {
           return {
             ...task,
@@ -23,8 +23,8 @@ function App() {
   }
 
   const addTask = (title: string): void => {
-    setlistTasks([
-      ...listTasks,
+    setTasks([
+      ...tasks,
       {
         id: Date.now(),
         title: title,
@@ -34,7 +34,7 @@ function App() {
   }
 
   const deleteTask = (id: number): void => {
-    setlistTasks(listTasks.filter((t) => id !== t.id))
+    setTasks(tasks.filter((t) => id !== t.id))
   }
 
   return (
@@ -42,7 +42,7 @@ function App() {
       <h1>My Todo List</h1>
       <TaskForm onAdd={addTask} />
       <ul>
-        {listTasks.map((task) => (
+        {tasks.map((task) => (
           <TaskItem key={task.id} task={task} onToggle={toggleTask} deleteTask={deleteTask} />
         ))}
       </ul>
