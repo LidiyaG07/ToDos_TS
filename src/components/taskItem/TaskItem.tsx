@@ -1,4 +1,5 @@
 import type { Task } from "../../types/task"
+import styles from './taskItem.module.css'
 
 interface TaskItemProps {
     task: Task,
@@ -7,13 +8,14 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ task, onToggle, deleteTask }: TaskItemProps) => {
+
     return (
-        <li>
-            <div>{task.title}</div>
+        <li className={styles.task}>
+            <div style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>{task.title}</div>
             <button onClick={() => onToggle(task.id)}>
                 {task.completed ? "Undo" : "Complete"}
             </button>
-            <button onClick={() => deleteTask(task.id)}>delete</button>
+            <button onClick={() => deleteTask(task.id)}>Delete</button>
         </li>
     )
 }
