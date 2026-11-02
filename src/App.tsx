@@ -1,11 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import type { Task } from './types/task'
 import TaskItem from './components/taskItem/TaskItem';
 import TaskForm from './components/taskForm/TaskForm';
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    try {
+      const savedTask = localStorage.getItem('app_tasks')
+      return savedTask ? JSON.parse(savedTask) : []
+    } catch (err) {
+      console.error('Ошибка при чтении tasks из localStorage:', err)
+      return []
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('app_tasks', JSON.stringify(tasks))
+    } catch (err) {
+      console.error('Ошибка при записи tasks в localStorage:', err);
+    }
+  })
 
   const toggleTask = (id: number): void => {
     setTasks(
