@@ -8,14 +8,11 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ task, onToggle, deleteTask }: TaskItemProps) => {
-    const taskComplete = (id: number) => {
-        onToggle(id)
-    }
 
     return (
         <li className={styles.task}>
             <div style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>{task.title}</div>
-            <button onClick={() => taskComplete(task.id)}>
+            <button onClick={() => onToggle(task.id)}>
                 {task.completed ? "Undo" : "Complete"}
             </button>
             <button onClick={() => deleteTask(task.id)}>Delete</button>
