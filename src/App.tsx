@@ -7,13 +7,18 @@ import TaskForm from './components/taskForm/TaskForm';
 function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
     try {
-      const savedTask = localStorage.getItem('app_tasks')
-      return savedTask ? JSON.parse(savedTask) : []
+      const savedTask = JSON.parse(String(localStorage.getItem('app_tasks')))
+      if (Array.isArray(savedTask)) return savedTask
+      throw new Error("указан объект вместо массива");
+
+
     } catch (err) {
       console.error('Ошибка при чтении tasks из localStorage:', err)
       return []
     }
   })
+
+  console.log(tasks);
 
   useEffect(() => {
     try {
@@ -21,7 +26,7 @@ function App() {
     } catch (err) {
       console.error('Ошибка при записи tasks в localStorage:', err);
     }
-  })
+  }, [tasks])
 
   const toggleTask = (id: number): void => {
     setTasks(
