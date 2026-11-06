@@ -13,7 +13,6 @@ function App() {
       } else {
         return []
       }
-      // throw new Error("указан объект вместо массива");
     } catch (err) {
       console.error('Ошибка при чтении tasks из localStorage:', err)
       return []
