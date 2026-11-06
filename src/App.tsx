@@ -8,17 +8,17 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
     try {
       const savedTask = JSON.parse(String(localStorage.getItem('app_tasks')))
-      if (Array.isArray(savedTask)) return savedTask
-      throw new Error("указан объект вместо массива");
-
-
+      if (Array.isArray(savedTask)) {
+        return savedTask
+      } else {
+        return []
+      }
+      // throw new Error("указан объект вместо массива");
     } catch (err) {
       console.error('Ошибка при чтении tasks из localStorage:', err)
       return []
     }
   })
-
-  console.log(tasks);
 
   useEffect(() => {
     try {
